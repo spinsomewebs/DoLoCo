@@ -70,8 +70,8 @@ module.exports = {
   },
 
   twilio: {
-    sid: process.env.TWILIO_SID || 'Your Twilio SID',
-    token: process.env.TWILIO_TOKEN || 'Your Twilio token'
+    sid: process.env.TWILIO_SID || 'AC64db742cb3db5161857258fec05b4b9f',
+    token: process.env.TWILIO_TOKEN || 'a30174e6fabc822764ba682a8e638661'
   },
 
   clockwork: {

@@ -1,8 +1,16 @@
 extends layout
 
 block content
-  h1 Bootstrap starter template
-  p.lead
-    | Use this document as a way to quickly start any new project.
-    br
-    | All you get is this text and a mostly barebones HTML document.
+    if user
+        if user.profile.picture
+            img.profile-image(src='#{user.profile.picture}')
+        else
+            img.profile-image(src='#{user.gravatar(60)}')
+        h2 #{user.profile.name || user.email || user.id}
+        div.badge.badge-succcess #{user.profile.score}
+    else
+        div.jumbotron
+            h1 Welcome to DoLoCo
+            p.lead Your Local Community Donation Platform
+            p
+                a.btn.btn-lg.btn-success(href="/signup",role="button") Sign up today

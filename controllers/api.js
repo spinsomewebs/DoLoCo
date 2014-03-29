@@ -405,13 +405,12 @@ exports.getTwilio = function(req, res, next) {
 exports.postTwilio = function(req, res, next) {
   var message = {
     to: req.body.telephone,
-    from: '+13472235148',
-    body: 'Hello from the Hackathon Starter'
+    from: '+18573016162',
+    body: req.body.message
   };
   twilio.sendMessage(message, function(err, responseData) {
     if (err) return next(err.message);
-    req.flash('success', { msg: 'Text sent to ' + responseData.to + '.'})
-    res.redirect('/api/twilio');
+    res.send('success', 200);
   });
 };
 

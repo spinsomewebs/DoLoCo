@@ -1,0 +1,7 @@
+extends ../layout
+
+block content
+	form(method="POST", action="/api/twilio", id='twilio-form')
+		input(type='hidden', id='twilio-number', value='', name='telephone')
+		input(type='hidden', id='twilio-message', value='', name='message')
+		input(type='hidden', name='_csrf', value=_csrf)
