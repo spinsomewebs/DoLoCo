@@ -2,7 +2,7 @@ extend ../layout
 
 block content
 	h1 Add Circle
-	form.form-horizontal(id="create-circle-form", action="/campaign/create", method="POST")
+	form.form-horizontal(id="create-circle-form", action="/community/create", method="POST")
 		input(type='hidden', name='_csrf', value=_csrf)
 		div.form-group
 			label.control-label Title:

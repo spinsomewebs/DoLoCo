@@ -2,14 +2,17 @@ extend ../layout
 
 block content
 	h1 Add Campaign
-	form.form-horizontal(id="create-circle-form", action="/community/create", method="POST")
+	form.form-horizontal(id="create-circle-form", action="/campaign/create", method="POST")
 		input(type='hidden', name='_csrf', value=_csrf)
 		input(type='hidden', name='community-id', value="#{communityId}")
 		div.form-group
 			label.control-label Title:
 			input.form-control(name='title', type='text')
 		div.form-group
-			label.control-label Community Image:
+			label.control-label Target Amount $:
+			input.form-control(name='target', type='number')
+		div.form-group
+			label.control-label Campaign Image:
 			input.form-control(name='image', type='text')
 		div.form-group
 			label.control-label Description:

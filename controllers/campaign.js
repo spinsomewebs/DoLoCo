@@ -1,4 +1,5 @@
 var Campaign = require('../models/Campaign');
+var User = require('../models/User');
 
 /**
  * GET /campaign/new
@@ -17,22 +18,44 @@ exports.newCampaign = function(req, res) {
  * Create New Campaign
  */
 
-exports.createCommunity = function(req, res) {
+exports.createCampaign = function(req, res) {
 	var campaign = new Campaign({
 		userId: req.session.passport.user,
-		communityId: ,
+		communityId: req.body.communityId,
 		description: req.body.description,
 		pictureUrl: req.body.image,
-		title: req.body.title
+		title: req.body.title,
+		targetGoal: req.body.target
 	});
 
-	community.save(function(err) {
+	campaign.save(function(err) {
 	    if (err) {
 	      if (err.code === 11000) {
 	        req.flash('errors', { msg: err });
 	      }
-	      return res.redirect('/community/new');
+	      return res.redirect('/campaign/new');
 	    }
-	    res.redirect('/community/invite/'+ community._id);
+	    res.redirect('/campaign/'+ campaign._id);
+	});
+};
+
+/**
+ * GET /campaign/join/:campaignId
+ * Page for a single campaign
+ */
+
+exports.get = function(req, res) {
+	Campaign.findById(req.params.campaignId, function (err, campaign) {
+		if (err) return next(err);
+
+		User.findById(campaign.userId, function (err, user) {
+			if (err) return next(err);
+
+			res.render('campaign/index', {
+				title: campaign.title,
+				'campaign': campaign,
+				'user': user
+			});
+		});
 	});
 };

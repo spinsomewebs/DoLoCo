@@ -2,6 +2,7 @@ var passport = require('passport');
 var Community = require('../models/Community');
 var Contact = require('../models/Contact');
 var Campaign = require('../models/Campaign');
+var User = require('../models/User');
 
 /**
  * GET /community
@@ -103,3 +104,64 @@ exports.inviteContacts = function(req, res) {
 			});
 	});
 };
+
+/**
+ * GET /community/join/:communityId
+ * Join a community
+ */
+
+exports.joinCommunity = function (req, res) {
+	var communityId = req.params.communityId;
+
+	Community.findById(communityId, function (err, community) {
+		res.render('community/join', {
+			'community': community
+		})
+	});
+}
+
+/**
+ * POST /community/createCommunityUser
+ * Adds a user to a community
+ */
+
+exports.createCommunityUser = function (req, res) {
+	Community.findById(req.body.communityId, function (err, community) {
+		var currentMembers = community.memberUserIds;
+		if (req.session.passport.user) {
+			if (req.session.passport.user !== community.organizerId) {
+				currentMembers.push(req.session.passport.user);
+				community.memberUserIds = currentMembers;
+
+				community.save(function (err) {
+					res.redirect('/community/' + req.body.communityId);
+				});
+			} else {
+				community.save(function (err) {
+					res.redirect('/community/' + req.body.communityId);
+				});
+			}
+		} else {
+			  var user = new User({
+			    email: req.body.email,
+			    password: req.body.password
+			  });
+
+			  user.save(function(err) {
+			    if (err) {
+			      if (err.code === 11000) {
+			        req.flash('errors', { msg: 'User with that email already exists.' });
+			      }
+			      res.redirect('/community/join/' + req.body.communityId);
+			    }
+
+			    currentMembers.push(user._id);
+			    community.memberUserIds = currentMembers;
+
+				community.save(function (err) {
+					res.redirect('/community/' + req.body.communityId);
+				});
+			  });
+		}
+	});
+}

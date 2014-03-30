@@ -125,7 +125,11 @@ app.get('/community/new', communityController.newCommunity);
 app.post('/community/create', communityController.createCommunity);
 app.get('/community/invite/:communityId', communityController.inviteContacts);
 app.get('/community/:communityId', communityController.listCampaigns);
+app.get('/community/join/:communityId', communityController.joinCommunity);
+app.post('/community/createCommunityUser', communityController.createCommunityUser)
 app.get('/campaign/new/:communityId', campaignController.newCampaign);
+app.post('/campaign/create', campaignController.createCampaign);
+app.get('/campaign/:campaignId', campaignController.get);
 
 /* APIs */
 app.get('/api', apiController.getApi);

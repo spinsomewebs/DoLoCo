@@ -1,0 +1,6 @@
+extends ../layout
+
+block content
+	h1 #{campaign.description}
+	h2 #{user.profile.name || user.email || user.id}
+	img(src='#{campaign.pictureUrl}')
