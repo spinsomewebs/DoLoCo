@@ -19,6 +19,8 @@ var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactsController = require('./controllers/contacts');
+var communityController = require('./controllers/community');
+var campaignController = require('./controllers/campaign');
 
 /**
  * API keys + Passport configuration.
@@ -117,7 +119,13 @@ app.post('/account/profile', passportConf.isAuthenticated, userController.postUp
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
-app.get('/contacts', contactsController.viewContacts)
+app.get('/contacts', contactsController.viewContacts);
+app.get('/community', communityController.listCommunities)
+app.get('/community/new', communityController.newCommunity);
+app.post('/community/create', communityController.createCommunity);
+app.get('/community/invite/:communityId', communityController.inviteContacts);
+app.get('/community/:communityId', communityController.listCampaigns);
+app.get('/campaign/new/:communityId', campaignController.newCampaign);
 
 /* APIs */
 app.get('/api', apiController.getApi);

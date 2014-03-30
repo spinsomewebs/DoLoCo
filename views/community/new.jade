@@ -1,0 +1,16 @@
+extend ../layout
+
+block content
+	h1 Add Circle
+	form.form-horizontal(id="create-circle-form", action="/campaign/create", method="POST")
+		input(type='hidden', name='_csrf', value=_csrf)
+		div.form-group
+			label.control-label Title:
+			input.form-control(name='title', type='text')
+		div.form-group
+			label.control-label Community Image:
+			input.form-control(name='image', type='text')
+		div.form-group
+			label.control-label Description:
+			textarea.form-control(name='description')
+		button.btn.btn-large.btn-block.btn-primary(type='submit') Create

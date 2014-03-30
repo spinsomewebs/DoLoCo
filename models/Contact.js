@@ -1,6 +1,9 @@
 var mongoose = require('mongoose');
 
-var campaignSchema = new mongoose.Schema({
+var contactSchema = new mongoose.Schema({
   name: String,
-  number: String
+  number: String,
+  userId: String
 });
+
+module.exports = mongoose.model('Contact', contactSchema);

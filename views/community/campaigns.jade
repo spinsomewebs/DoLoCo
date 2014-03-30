@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+	if campaigns.length != 0
+		ul.list-group
+			each campaign in campaigns
+				li.list-group-item
+					img(src='#{campaign.pictureUrl}')
+					a(href="/campaign/#{campaign._id}")
+						strong #{campaign.title}
+	else
+		h2 No Campaigns Yet
+	a.btn.btn-block.btn-primary(href="/campaign/new/#{communityId}") Create Campaign

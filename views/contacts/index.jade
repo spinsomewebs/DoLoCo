@@ -2,6 +2,12 @@ extends ../layout
 
 block content
 	form(method="POST", action="/api/twilio", id='twilio-form')
-		input(type='hidden', id='twilio-number', value='', name='telephone')
 		input(type='hidden', id='twilio-message', value='', name='message')
+		input(type='hidden', id='community-id', value='#{communityId}', name='communityId')
 		input(type='hidden', name='_csrf', value=_csrf)
+	ul.list-group
+		each contact in contacts
+			li.list-group-item
+				input.contact-number.checkbox.checkbox-inline(type='checkbox', value='#{contact.number}')
+				strong #{contact.name} #{contact.number}
+	button.btn.btn-block.btn-primary.js-invite-contacts(type='submit') Invite Contacts

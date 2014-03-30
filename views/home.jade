@@ -3,11 +3,14 @@ extends layout
 block content
     if user
         if user.profile.picture
-            img.profile-image(src='#{user.profile.picture}')
+            img.profile-image.img-circle(src='#{user.profile.picture}')
         else
-            img.profile-image(src='#{user.gravatar(60)}')
+            img.profile-image.img-circle(src='#{user.gravatar(60)}')
         h2 #{user.profile.name || user.email || user.id}
         div.badge.badge-succcess #{user.profile.score}
+        a.btn.btn-block.btn-large.btn-primary.clearfix(href='/community/new')
+          i.glyphicon.glyphicon-plus.pull-right
+          span.pull-left Create Circle
     else
         div.jumbotron
             h1 Welcome to DoLoCo

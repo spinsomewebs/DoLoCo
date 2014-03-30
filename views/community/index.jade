@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+	ul.list-group
+		each community in communities
+			li.list-group-item
+				img(src='#{community.pictureUrl}')
+				a(href="/community/#{community._id}")
+					strong #{community.title}

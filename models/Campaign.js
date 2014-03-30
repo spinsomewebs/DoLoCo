@@ -5,5 +5,9 @@ var campaignSchema = new mongoose.Schema({
   communityId: String,
   targetGoal: Number,
   currentBalance: Number,
+  pictureUrl: String,
+  title: String,
   description: {type: String, default: 'New Campaign'}
 });
+
+module.exports = mongoose.model('Campaign', campaignSchema);

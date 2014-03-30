@@ -7,10 +7,17 @@ var User = require('../models/User');
  */
 
 exports.index = function(req, res) {
-	User.findById(req.session.passport.user, function(err, user) {
-	  res.render('home', {
-	    title: 'Home',
-	    user: user
-	  });
-	});
+	if (req.session.passport.user) {
+		User.findById(req.session.passport.user, function(err, user) {
+		  res.render('home', {
+		    title: 'Home',
+		    user: user
+		  });
+		});
+	} else {
+		res.render('home', {
+			title:'Home',
+			user: null
+		})
+	}
 };
